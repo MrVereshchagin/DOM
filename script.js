@@ -43,10 +43,14 @@ pDiv.children[1].classList.add("text");
 pDiv.firstElementChild.remove();
 
 const generateAutoCard = (brand, color, year) => {
+    const curDate = new Date();
+    const curYear = curDate.getFullYear();
     return `
         <div class = "autoCard">
-            <h2>BRAND YEAR</h2>
-            <p>Автомобиль BRAND - YEAR года. Возраст авто - YEARs лет.</p>
+            <h2>${brand.toUpperCase()} ${year}</h2>
+            <p>Автомобиль ${brand.toUpperCase()}  - ${year} года. Возраст авто - ${curYear - year} лет.</p>
+            <p>Цвет: ${color}</p>
+            <button type="button" class="btn">Удалить</button>
         </div>
     `;
 }
@@ -54,7 +58,29 @@ const generateAutoCard = (brand, color, year) => {
 const carsDiv = document.createElement('div');
 carsDiv.classList.add("autos");
 
-console.log(carsDiv);
+const carsList = [
+    {brand: "Tesla", year: 2015, color: "red"},
+    {brand: "Lexus", year: 2016, color: "silver"},
+    {brand: "Nissan", year: 2012, color: "black"},
+]
 
+const carsHTML = carsList.map(car => {
+    return generateAutoCard (car.brand, car.color, car.year);
+}).join("");
 
+carsDiv.innerHTML = carsHTML;
+
+div.insertAdjacentElement("beforebegin", carsDiv);
+
+const buttons = document.querySelectorAll(".btn");
+
+function handleClick(e) {
+    const currentButton = e.currentTarget;
+    //currentButton.parentElement.remove();
+    currentButton.closest(".autoCard").remove();
+}
+
+buttons.forEach(button => {
+    button.addEventListener("click", handleClick);
+})
 
