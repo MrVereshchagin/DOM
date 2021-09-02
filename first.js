@@ -44,11 +44,11 @@ pDiv.firstElementChild.remove();
 
 const generateAutoCard = (brand, color, year) => {
     const curDate = new Date();
-    const curYear = curDate.getFullYear();
+    const curYear = curDate.getFullYear('');
     return `
         <div class = "autoCard">
             <h2>${brand.toUpperCase()} ${year}</h2>
-            <p>Автомобиль ${brand.toUpperCase()}  - ${year} года. Возраст авто - ${curYear - year} лет.</p>
+            <p>Автомобиль ${brand.toUpperCase()}  - ${year} года. Возраст авто - ${year - (+curYear)} лет.</p>
             <p>Цвет: ${color}</p>
             <button type="button" class="btn">Удалить</button>
         </div>

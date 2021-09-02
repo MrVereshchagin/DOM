@@ -1,81 +1,81 @@
-const div = document.createElement("div");
-div.classList.add("wrapper");
 const body = document.body;
+const div = document.createElement('div');
+div.classList.add('wrapper');
+
 body.appendChild(div);
 
-const header = document.createElement("h1");
-header.textContent = "DOM (Document Object Model)";
-div.insertAdjacentElement("beforebegin", header);
+const h1 = document.createElement('h1');
+h1.innerText = 'DOM (Document Object Model)';
+
+div.insertAdjacentElement('beforebegin', h1);
 
 const list = `
     <ul>
-        <li>один</li>
-        <li>два</li>
-        <li>три</li>
+        <li>One</li>
+        <li>Two</li>
+        <li>Three</li>
     </ul>
 `;
 
-div.insertAdjacentHTML("afterbegin", list);
+div.insertAdjacentHTML('afterbegin', list);
 
-const image = document.createElement("img");
-image.src = "https://picsum.photos/200";
-image.width = 240;
-image.classList.add("super");
-image.alt = "Super Man";
+const image = document.createElement('img');
+image.src = 'https://picsum.photos/seed/picsum/200/300';
+image.width = 360;
+image.classList.add('super');
+image.alt = 'Super Man';
+div.insertAdjacentElement('beforeend', image);
 
-div.insertAdjacentElement("beforeend", image);
-
-const div2 = `
-    <div class="pDiv">
-        <p>Первый</p>
-        <p>Второй</p>
+const div1 = `
+    <div class='pDiv'>
+        <p>First</p>
+        <p>Second</p>
     </div>
 `;
 
-const ul = document.querySelector("ul");
-ul.insertAdjacentHTML("beforebegin", div2);
+const ul = document.querySelector('ul');
+ul.insertAdjacentHTML('beforebegin', div1);
 
-const pDiv = document.querySelector(".pDiv");
-pDiv.children[1].classList.add("text");
+const pDiv = document.querySelector('.pDiv');
+pDiv.children[1].classList.add('text');
 
-pDiv.firstElementChild.remove();
+pDiv.lastElementChild.remove('');
 
 function generateAutoCard(brand, color, year) {
     const date = new Date();
     const curDate = date.getFullYear();
     return `
-        <div class="autoCard">
-            <h2>${brand.toUpperCase()} ${year}</h2>
-            <p>Автомобиль ${brand.toUpperCase()} - ${year} года. Возраст авто - ${curDate - year} лет.</p>
-            <button class="btn">Удалить</button>
-        </div>
+    <div class="autoCard">
+        <h2>${brand.toUpperCase()} ${year}</h2>
+        <p>Автомобиль ${brand} - ${year} года. Возраст авто - ${curDate - year} лет.</p>
+        <button class='btn'>Delete</button>
+    </div>
     `;
 }
 
-const div3 = document.createElement("div");
-div3.classList.add("autos");
+const div2 = document.createElement('div');
+div2.classList.add('autos');
+div.insertAdjacentElement('beforebegin', div2);
 
 const carsList = [
-    {brand: "Tesla", year: 2015, color: "red"},
-    {brand: "Lexus", year: 2016, color: "silver"},
-    {brand: "Nissan", year: 2012, color: "black"},
-]
+    {brand: 'Tesla', year: 2015, color: 'Красный'},
+    {brand: 'Lexus', year: 2016, color: 'Серебристый'},
+    {brand: 'Nissan', year: 2012, color: 'Черный'},
+];
 
-const cars = carsList.map(car => {
+const myCars = carsList.map(car => {
     return generateAutoCard(car.brand, car.color, car.year);
-}).join("");
+}).join('');
 
-div3.innerHTML = cars;
+div2.insertAdjacentHTML('afterbegin', myCars);
 
-div.insertAdjacentElement("beforebegin", div3);
+const btn = document.querySelectorAll('.btn');
 
-const button = document.querySelectorAll(".btn");
-
-function deleteCar (e) {
-    const clickButton = e.currentTarget;
-    clickButton.closest(".autoCard").remove();
+function deleteButton (e) {
+    const currentButton = e.currentTarget;
+    currentButton.closest('.autoCard').remove('');
 }
 
-button.forEach(elem => {
-    elem.addEventListener("click", deleteCar);
+btn.forEach(button => {
+    button.addEventListener('click', deleteButton);
 });
